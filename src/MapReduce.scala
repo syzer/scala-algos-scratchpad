@@ -28,5 +28,19 @@ object Counts extends App {
   }.reduceLeft(_ + _)
 
   println(stringOf(comCounts)) // 786
+
+
+  // Vectors - like immutable array
+  val myFruits = List("grape", "banana", "apple", "mango")
+  val myFruits2 = Vector("grape", "banana", "apple", "mango")
+
+  val combinedFruits = myFruits ++ myFruits2
+  val apples = combinedFruits.filter(x => x == "apple")
+  println(stringOf(apples)) // List(apple, apple)
+
+
+  val grouped = combinedFruits groupBy {x => x.length}
+  println(stringOf(grouped)) //HashMap(5 -> List(grape, apple, mango, grape, apple, mango), 6 -> List(banana, banana))
+
 }
 
