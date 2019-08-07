@@ -10,20 +10,21 @@ println(elems)
 elems.foldLeft(0)(_ + _)
 
 def indexOf(elems: List[Int], elem: Int): Int = {
-  val index = -1
+  var index = -1
+  var currIndex = 0
   elems.foldLeft(0)((acc, curr) => {
-    //    println(x, i)
+    currIndex = currIndex + 1
     if (curr == elem) {
-      println(index)
+      index = currIndex
     }
-    -1
+    index
   })
-  //  -1
 }
 
-val num1 = indexOf(elems, 2)
-println(num1)
-
+println("Answer ", 1, "indexOf",
+  indexOf(elems, 3))
+println("Answer ", 2, "Average",
+  elems.sum / elems.length)
 println("Answer ", 3, "Reverse",
   elems.reverse)
 println("Answer ", 4, "Last elem",
