@@ -5,3 +5,5 @@
 // 4. Get the last element using foldLeft.
 // 5. Calculate the length using foldLeft.
 
+val elems = List(1, 2, 3, 4, 5)
+println(elems)
