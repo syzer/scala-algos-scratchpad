@@ -49,16 +49,33 @@ println("-=======-")
 // 4. Find whether the word “monkey” exists. Also check whether the word “university” exists.
 // 5. Use immutable APIs as much as possible; however, you may use println for manual validation.
 
-abstract class Thing(name: String) {
-  implicit def ordering[A <: Thing]: Ordering[A] = Ordering.by(_.toString)
-}
+//abstract class Thing(name: String) {
+//  implicit def ordering[A <: Thing]: Ordering[A] = Ordering.by(_.toString)
+//}
+//
+////class Word(name: String) extends Thing(name)
+//
+//case class Animal(name: String) extends Ordered Thing(name)
+//
+//case class Fruit(name: String, taste: String) extends Thing(name)
+//
+////val dict = List(Animal("rat"), Fruit("apple"), Thing("color"), Thing("university"))
+//val dict = List(Animal("rat"))
+//println(dict.sorted)
 
-//class Word(name: String) extends Thing(name)
 
-case class Animal(name: String) extends Ordered Thing(name)
+val myDict = List("apple", "cow", "color", "god",
+  "goat", "dog", "house", "mother", "orange", "house",
+  "rat", "zeal", "university")
 
-case class Fruit(name: String, taste: String) extends Thing(name)
+myDict.foreach(println)
+myDict.sorted.foreach(println)
 
-//val dict = List(Animal("rat"), Fruit("apple"), Thing("color"), Thing("university"))
-val dict = List(Animal("rat"))
-println(dict.sorted)
+println("Duplicate words: ",
+  myDict.groupBy(identity).collect {
+    case (x, List(_, _, _*)) => x
+  }.size)
+
+println("Words count: ", myDict.size)
+println(myDict.contains("monkey"))
+println(myDict.contains("university"))
