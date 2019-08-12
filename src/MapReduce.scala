@@ -1,7 +1,3 @@
-/**
- * Created by lukas on 05/08/19.
- */
-
 import scala.runtime.ScalaRunTime._
 
 object Counts extends App {
