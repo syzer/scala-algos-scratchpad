@@ -1,6 +1,7 @@
 import scala.runtime.ScalaRunTime._
+import scala.collection.immutable.Stream._
 
-object Counts extends App {
+object MapReduce extends App {
   val counts = Array(
     "666,google.com",
     "60,mail.yahoo.com",
@@ -14,12 +15,13 @@ object Counts extends App {
   println(stringOf(counts))
 
   val countsMap = counts.map(_.split(",")).map {
-    case Array(s1,s2) => (s1,s2)}
+    case Array(s1, s2) => (s1, s2)
+  }
 
   println(stringOf(countsMap))
 
   val comCounts = countsMap.map {
-    case(x,y) if y.endsWith(".com") => x.toInt
+    case (x, y) if y.endsWith(".com") => x.toInt
     case _ => 0
   }.reduceLeft(_ + _)
 
@@ -35,8 +37,29 @@ object Counts extends App {
   println(stringOf(apples)) // List(apple, apple)
 
 
-  val grouped = combinedFruits groupBy {x => x.length}
-  println(stringOf(grouped)) //HashMap(5 -> List(grape, apple, mango, grape, apple, mango), 6 -> List(banana, banana))
+  val grouped = combinedFruits groupBy { x => x.length }
+  println(stringOf(grouped)) // HashMap(5 -> List(grape, apple, mango, grape, apple, mango), 6 -> List(banana, banana))
+
+  val myNums = Stream(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+  println(myNums, myNums(3), myNums(5))
+
+  def createInfStream(x: Int): Stream[Int] = {
+    println("Processing...")
+    cons(x, createInfStream(x + 1))
+  }
+
+  println(createInfStream(4))
+
+
+  // Fibonacci
+  def createFiboSeries(a: Int, b: Int):
+    Stream[Int] = {
+      cons(a, createFiboSeries(b, a + b))
+    }
+
+  val fibonacci = createFiboSeries(0, 1)
+  println(fibonacci)
+  fibonacci.take(10).foreach(println) // 0 to 34
 
 }
 
